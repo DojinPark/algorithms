@@ -31,17 +31,17 @@ def solution(key, lock):
     keys.append( rotate_key(keys[2]) )
 
     for key in keys:
-        for R in range(1, M + N):
-            for C in range(1, M + N):
+        for R in range(0, M + N):
+            for C in range(0, M + N):
 
                 for r in range(0, M):
                     for c in range(0, M):
-                        globe[R + r][C + c] += key[r][c]
+                        globe[R + r][C + c] ^= key[r][c]
 
                 success = True
                 for r in range( max(M, R), min(M + N, R + 1) ):
                     for c in range( max(M, R), min(M + N, R + 1) ):
-                        if globe[r][c] == 2 or globe[r][c] == 0:
+                        if not globe[r][c]:
                             success = False
                             break
                     if not success: break
@@ -50,7 +50,7 @@ def solution(key, lock):
 
                 for r in range(0, M):
                     for c in range(0, M):
-                        globe[R + r][C + c] -= key[r][c]
+                        globe[R + r][C + c] ^= key[r][c]
                         
     return False
 
