@@ -29,7 +29,7 @@ def solution(n, build_frame):
 
         return ok
 
-    def ok():
+    def ok():   # 이 함수를 기둥이나 보가 있는 위치에 대해서만 동작하도록 DFS 코드를 짜려고 시도했으나 너무 복잡해서 포기함. 시뮬레이션/구현 문제는 절대 효율성을 따져서는 안되고, 빠르고 간단하게 코드를 구현하는 것을 목표로 해야한다.
         for x in range(n+1):
             for y in range(n+1):
                 if gi[x][y]:
