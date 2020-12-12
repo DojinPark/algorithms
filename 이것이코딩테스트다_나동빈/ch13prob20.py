@@ -28,15 +28,15 @@ def look_straight(x, y, dir):
     while True:
         nx = nx + dx[dir]
         ny = ny + dy[dir]
-        if not ok(nx, ny): return False
-        if globe[nx][ny] == OBSTACLE: return False
-        if globe[nx][ny] == STUDENT: return True
+        if not ok(nx, ny): return True
+        if globe[nx][ny] == OBSTACLE: return True
+        if globe[nx][ny] == STUDENT: return False
 
 def watch(x, y):
     for dir in range(4):
-        fail = look_straight(x, y, dir)
-        if fail: return True
-    return False
+        successful = look_straight(x, y, dir)
+        if not successful: return False
+    return True
 
 ###
 def check_vision():
@@ -44,9 +44,9 @@ def check_vision():
     for x in range(N):
         for y in range(N):
             if globe[x][y] == TEACHER:
-                fail = watch(x, y)
-                if fail: return True
-    return False
+                successful = watch(x, y)
+                if not successful: return False
+    return True
 
 def is_teacher_near(x, y):
     global globe
@@ -63,6 +63,39 @@ for x in range(N):
         if globe[x][y] == TEACHER:
             watch(x, y)
 
+def place_obstacle_rec(X, Y, ob_idx):
+    global globe
+
+    if ob_idx == 3:
+        successful = check_vision()
+        if successful: return True
+        else: return False
+
+    x = X
+    for y in range(Y + 1, N):
+        if globe[x][y] == EMPTY:
+            globe[x][y] = OBSTACLE
+            successful = place_obstacle_rec(x, y, ob_idx + 1)
+            if successful: return True
+            globe[x][y] = EMPTY
+    
+    for x in range(X + 1, N):
+        for y in range(N):
+            if globe[x][y] == EMPTY:
+                globe[x][y] = OBSTACLE
+                successful = place_obstacle_rec(x, y, ob_idx + 1)
+                if successful: return True
+                globe[x][y] = EMPTY
+
+    return False
+    
+def solve():
+    for x in range(N):
+        for y in range(N):
+            successful = place_obstacle_rec(x, y, 0)
+            if successful: return True
+    return False
+
 teacher = False
 for x in range(N):
     for y in range(N):
@@ -70,32 +103,6 @@ for x in range(N):
             teacher = is_teacher_near(x, y)
             if teacher: break
     if teacher: break
-
-def solve(X = 0, Y = 0, ob_idx = 1):
-    global globe
-
-    if ob_idx == 3:
-        fail = check_vision()
-        if not fail: return True
-        else: return False
-
-    x = X
-    for y in range(Y + 1, N):
-        if globe[x][y] == EMPTY:
-            globe[x][y] = OBSTACLE
-            fail = solve(x, y, ob_idx + 1)
-            if not fail: return True
-            globe[x][y] = EMPTY
-    
-    for x in range(x + 1, N):
-        for y in range(N):
-            if globe[x][y] == EMPTY:
-                globe[x][y] = OBSTACLE
-                fail = solve(x, y, ob_idx + 1)
-                if not fail: return True
-                globe[x][y] = EMPTY
-
-    return False
 
 successful = False
 if not teacher:
