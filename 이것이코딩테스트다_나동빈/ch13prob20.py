@@ -88,14 +88,17 @@ def place_obstacle_rec(X, Y, ob_idx):
                 globe[x][y] = EMPTY
 
     return False
-    
+
+# 알고리즘
 def solve():
+    # NxN 행렬의 모든 위치에서 obstacle을 놓고 
     for x in range(N):
         for y in range(N):
             successful = place_obstacle_rec(x, y, 0)
             if successful: return True
     return False
 
+# 학생의 바로 근처에 선생님이 있는 경우를 확인
 teacher = False
 for x in range(N):
     for y in range(N):
@@ -103,10 +106,12 @@ for x in range(N):
             teacher = is_teacher_near(x, y)
             if teacher: break
     if teacher: break
-
+ 
 successful = False
+# 학생의 바로 근처에 선생님이 있는 경우 Early Stop
 if not teacher:
+    # 알고리즘 실행
     successful = solve()
-
+    
 if successful: print('YES')
 else: print('NO')
