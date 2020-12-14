@@ -1,7 +1,4 @@
-l = [
-    (1, 1),
-    (2, 2)
-]
-
-l[0] = (3,3)
-print(l)
+l = []
+print( not l)
+l.append(1)
+print(not l)

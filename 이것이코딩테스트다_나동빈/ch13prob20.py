@@ -89,7 +89,7 @@ def place_obstacle_rec(X, Y, ob_idx):
 
     return False
 
-# 알고리즘
+# Main
 def solve():
     # NxN 행렬의 모든 위치에서 obstacle을 놓고 
     for x in range(N):
