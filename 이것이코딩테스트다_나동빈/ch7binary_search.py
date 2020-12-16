@@ -35,3 +35,17 @@ print( binary_search(a, 4, 0, len(a)-1) )
 print( binary_search(a, 0, 0, len(a)-1) )
 print( binary_search(a, 9, 0, len(a)-1) )
 print( binary_search(a, 10, 0, len(a)-1) )
+
+
+
+# bisect 모듈 사용하기
+print("bisect test")
+from bisect import bisect_left, bisect_right
+a = [8, 4, 2, 4, 4, 16]
+a.sort()
+print('i:', [i for i in range(len(a))])
+print('a:', a)
+print(bisect_left(a, 5))    # "정렬 순서를 지키며 5를 삽입할 가장 왼쪽 인덱스"
+print(bisect_right(a, 5))   # "정렬 순서를 지키며 5를 삽입할 가장 오른쪽 인덱스"
+print(bisect_left(a, 4))
+print(bisect_right(a, 4))

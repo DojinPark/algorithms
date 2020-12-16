@@ -1,2 +1,3 @@
-print(round(4.5))
-print(round(3.5))
+N = 10
+for i in range(N, 0, -1):
+    print(i, sep=' ')
