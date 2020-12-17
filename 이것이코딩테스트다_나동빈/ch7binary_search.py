@@ -14,16 +14,20 @@
 # a는 반드시 정렬되어있는 배열이어야한다.
 def binary_search(a, target, start, end):
     while True:
-        mid = (start + end) // 2
         # 원소 없음             
         if end < start:         # 이 조건문이 가장 앞에 있어야 하는 것 중요!
             return None
+
+        mid = (start + end) // 2
+
         # 일치
         if a[mid] == target:
             return mid
+
         # 왼쪽 탐색
         if target < a[mid]:
             end = mid - 1       # 1을 빼줘야 하는 것 중요!
+            
         # 오른쪽 탐색
         elif a[mid] < target:
             start = mid + 1     # 1을 더해줘야 하는 것 중요!!
