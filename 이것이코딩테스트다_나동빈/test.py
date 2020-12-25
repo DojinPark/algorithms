@@ -1,7 +1,4 @@
-
-def func(a):
-    a[2] = 123
-
-a = [1, 2, 3, 4, 5]
-func(a)
-print(a)
+for i in range(10):
+    print(i)
+    if i == 3: i += 1
+    if i == 5: i += 1
