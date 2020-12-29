@@ -182,9 +182,15 @@ for e in edges:
 for a in range(1, V+1):
     graph[a][a] = 0
 
-for a in range(1, V+1):
-    for b in range(1, V+1):
-        for k in range(1, V+1):
+# a, b, k 또는 a, k, b 의
+# 의 루프 순서가 틀린 이유 -> 아래 논문 참조
+# https://arxiv.org/pdf/1904.01210.pdf
+# 또는 반례를 통해 틀렸음만 증명할 수도 있다.
+#
+# k, a, b 의 루프 순서가 맞다는 점을 외워두기만 해도 좋다!
+for k in range(1, V+1):
+    for a in range(1, V+1):
+        for b in range(1, V+1):
             graph[a][b] = min(graph[a][b], graph[a][k] + graph[k][b])
 
 for a in range(1, V+1):
