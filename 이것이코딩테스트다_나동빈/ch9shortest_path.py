@@ -109,15 +109,15 @@ def djikstra_fast(start):
     distance[start] = 0
     push(q, (start, 0))
 
-    # O(E)  -- 1
+    # O(E)  -- [1]
     while q:
         # O(logE)
         v, d = pop(q)
 
-        if distance[v] < d: # 거리가 더 멀어서 간선을 무시하는 경우, 이미 최소거리를 구해낸 정점인 경우 모두가 이 조건문으로 처리됨
+        if distance[v] < d: # 거리가 더 멀어서 간선을 무시하는 경우, 이미 최소거리를 구해낸 정점인 경우가 이 조건문으로 처리됨
             continue
 
-        # O(E)   -- 2     1 이랑 같이 움직이는 루프임!
+        # O(E)   -- [2]     시간 복잡도를 구할 때 루프[1]과 함께 O(E)로 계산되는 루프
         for e in graph[v]:
             adjv, adjd = e
             cost = d + adjd
@@ -151,10 +151,14 @@ print('\n')
 # 플로이드-워셜 - DP 알고리즘
 #
 # DP라서 코드가 진짜 간단
+# for k: 1~V              -> O(V)
+#   for all (a,b) pairs   -> O(V^2)
+#     D(a,b) = min( D(a,k), D(k,b) )   -> DP 점화식
+#
+# 똑같이 동작하나?
 # for all (a,b) pairs   -> O(V^2)
 #   for k: 1~V          -> O(V)
 #       D(a,b) = min( D(a,k), D(k,b) )   -> DP 점화식
-
 V, E = 4, 7
 edges = {
     '1 2 4',
