@@ -58,20 +58,28 @@ print()
 #
 # 참고: 직계 부모 노드가 아닌 루트 노드를 찾는 함수임
 # 원리: 재귀 함수 호출의 끝에서 찾은 루트 노드를 반환받아 부모 리스트에 저장한다. 부모 리스트의 모든 엔트리는 루트 노드만을 저장하게 된다.
-def find_parent(parent, x):
-    # if parent[x] == x:                            # NoneType 이 반환되는 경우가 발생한다. parent[x] != x 일때 반환값이 없기 때문!
-    #     return parent[x]                          # 파이썬 함수 작성시 NoneType 이 반횐되는 경우 모든 케이스에 대하여 반환값을 지정해두었는지 확인하자.
-    # parent[x] = find_parent(parent, parent[x])
-    if parent[x] != x:
-        parent[x] = find_parent(parent, parent[x])
-    return parent[x]
+def find_root(root, x):
+    # if root[x] == x:                            # NoneType 이 반환되는 경우가 발생한다. root[x] != x 일때 반환값이 없기 때문!
+    #     return root[x]                          # 파이썬 함수 작성시 NoneType 이 반횐되는 경우 모든 케이스에 대하여 반환값을 지정해두었는지 확인하자.
+    # root[x] = find_root(root, root[x])
+    if root[x] != x:
+        root[x] = find_root(root, root[x])
+    return root[x]
 
-parent = [i for i in range(V+1)]
+def union_root(root, a, b):
+    a = find_root(root, a)
+    b = find_root(root, b)
+    if a < b:
+        root[b] = a
+    else:
+        root[a] = b
+
+root = [i for i in range(V+1)]
 
 
 for i in range(E):
     a, b = map(int, parent_str[i].split())
-    union_parent(parent, a, b)
+    union_root(root, a, b)
 
 print('\n서로소 집합 알고리즘 2')
 print('각 원소가 속한 집합')
@@ -79,7 +87,7 @@ for i in range(1, V + 1):
     print(i, end=' ')
 print()
 for i in range(1, V + 1):
-    print(find_parent(parent, i), end=' ')
+    print(find_root(root, i), end=' ')
 print()
 
 print('부모 테이블')
@@ -87,7 +95,7 @@ for i in range(1, V + 1):
     print(i, end=' ')
 print()
 for i in range(1, V + 1):
-    print(parent[i], end=' ')
+    print(root[i], end=' ')
 print()
 
 
