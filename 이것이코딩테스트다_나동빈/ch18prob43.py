@@ -1,4 +1,12 @@
 # 어두운 길
+#
+# Kruskal's 알고리즘
+# 한줄 설명: 비용이 작은 간선 순서로, 사이클을 형성하지 않을 때 마다 연결하여 총 N-1 개의 간선을 연결
+# 시간 복잡도: O(E logE) (간선 정렬 시간)
+# 
+# Kruskal vs Prim
+# O(E logE) vs O(V^2) ( O(V logE) )
+# Sparse Graph vs Dense Graph
 
 N, M = 7, 11
 Mstr = [
