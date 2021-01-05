@@ -21,7 +21,7 @@ def get_zero_indegree(indegree, visited):
 def solution():
     AB = []
 
-    # 처음 순위를 그래프로 나타내고 indegree 리스트를 초기화함
+    # 처음 순위를 그래프로 나타내고 indegree 리스트를 초기화
     n = int(input())
     T = list( map(int, sys.stdin.readline().rstrip().split()) )
 
@@ -33,7 +33,7 @@ def solution():
             graph[a][b] = True
             indegree[b] += 1
 
-    # 순위가 뒤바뀐 경우를 그래프와 indegree 리스트에서 업데이트함
+    # 순위가 뒤바뀐 경우를 그래프와 indegree 리스트에서 업데이트
     m = int(input())
     for _ in range(m):
         a, b = map(int, sys.stdin.readline().rstrip().split())
