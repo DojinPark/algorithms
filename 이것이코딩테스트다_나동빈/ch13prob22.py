@@ -113,3 +113,86 @@
 # # print( solution(board) )
 # # # 7
 
+from collections import deque
+
+INF = int(1e9)
+dx = [0, 1, 0, -1]
+dy = [1, 0, -1, 0]
+N = 0
+rotate_to_vertical_dx = [0, 0, 1, 1]
+rotate_to_vertical_dy = [-1, 0, -1, 0]
+check_board_to_vertical_dx = [1, 1, 0, 0]
+check_board_to_vertical_dy = [-1, 1, -1, 1]
+rotate_to_horizontal_dx = [0, 0, -1, -1]
+rotate_to_horizontal_dy = [0, 1, 0, 1]
+check_board_to_horizontal_dx = [1, 1, -1, -1]
+check_board_to_horizontal_dy = [1, 0, 1, 0]
+
+def ok(nx, ny):
+    return nx >=0 and nx < N and ny >= 0 and ny < N
+
+def get_other_xy(x, y, vertical):
+    if vertical:
+        return x, y + 1
+    else:
+        return x + 1, y
+
+def get_move(board, x, y, vertical):
+    ret = []
+
+    for i in range(4):
+        nx = x + dx[i]
+        ny = y + dy[i]
+        other_x, other_y = get_other_xy(nx, ny, vertical)
+        if ok(nx, ny) and ok(other_x, other_y) and not board[nx][ny] and not board[other_x][other_y]:
+            ret.append( (nx, ny, vertical) )
+    
+    return ret
+
+def get_rotate(board, x, y, vertical):
+    ret = []
+    
+    new_direction = not vertical
+    for i in range(4):
+        if vertical:
+            nx = x + rotate_to_horizontal_dx[i]
+            ny = y + rotate_to_horizontal_dy[i]
+            check_x = x + check_board_to_horizontal_dx[i]
+            check_y = y + check_board_to_horizontal_dy[i]
+        else:
+            nx = x + rotate_to_vertical_dx[i]
+            ny = y + rotate_to_vertical_dy[i]
+            check_x = x + check_board_to_vertical_dx[i]
+            check_y = y + check_board_to_vertical_dy[i]
+        other_x, other_y = get_other_xy(nx, ny, new_direction)
+        if ok(nx, ny) and ok(other_x, other_y) and ok(check_x, check_y) and not board[nx][ny] and not board[other_x][other_y] and not board[check_x][check_y]:
+            ret.append( (nx, ny, new_direction) )
+    
+    return ret
+
+def solution(board):
+    global N
+    N = len(board)
+
+    steps = [ [[INF] * 2 for _ in range(N)] for _ in range(N) ]
+    q = deque()
+
+    steps[0][0][0] = 0
+    q.append( (0, 0, 0) )
+
+    while q:
+        x, y, vertical = q.popleft()
+        steps_now = steps[x][y][vertical]
+
+        nex = get_move(board, x, y, vertical)
+        nex += get_rotate(board, x, y, vertical)
+
+        for nx, ny, nvertical in nex:
+            if steps[nx][ny][nvertical] > steps_now + 1:
+                steps[nx][ny][nvertical] = steps_now + 1
+                q.append( (nx, ny, nvertical) )
+        
+        if steps[N-2][N-1][0] != INF:
+            return steps[N-2][N-1][0]
+        if steps[N-1][N-2][1] != INF:
+            return steps[N-1][N-2][1]
