@@ -201,7 +201,8 @@
 #         if steps[N-1][N-2][1] != INF:
 #             return steps[N-1][N-2][1]
 
-
+# BFS 응용
+# 오답노트: cost를 2차원 지도가 아닌 큐에 저장하기
 from collections import deque
 
 dx = [1, 0, -1, 0]
@@ -246,8 +247,10 @@ def get_next_pos(board, pos):
     ret += get_rotated_pos(board, pos)
     return ret
 
+# BFS 알고리즘 응용
 def solution(board):
     N = len(board)
+    # 테두리에 벽을 세운 보드를 이용하면 index 처리가 간편함
     new_board = [ [1] * (N + 2) for _ in range(N + 2) ]
     for r in range(N):
         for c in range(N):
@@ -257,10 +260,15 @@ def solution(board):
     visited = set()
     q = deque()
 
+    # 로봇이 차지하는 좌표 두개를 튜플에 저장
     pos = ((1, 1), (1, 2))
+    # set() 타입인 visited에 BFS 알고리즘 방문 표시
     visited.add(pos)
+    # 좌표 정보와 걸린 시간을 함께 큐에 저장
+    # 걸린 시간을 이차원 지도에 표시할 필요가 없음 -> 이 잘못된 고민 때문에 틀린 풀이 두개 나옴!
     q.append((pos, 0))
 
+    # BFS
     while q:
         pos, steps = q.popleft()
         if (N, N) in pos:
