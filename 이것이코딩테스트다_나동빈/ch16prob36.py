@@ -3,57 +3,60 @@
 # https://www.acmicpc.net/problem/7620
 # 으로 대체
 
-import sys
-from copy import deepcopy
+INF = int(1e9)
+CPY = 0
+ADD = 1
+DEL = 2
+MOD = 3
 
-MATCH = 1
-DIFF = 0
-END = -1
+from collections import deque
 
-str1 = list(input())
-str2 = list(input())
-copy = deepcopy(str2)
+str1 = input()
+str2 = input()
 
-str1.append(END)
-str2.append(END)
+len1 = len(str1)
+len2 = len(str2)
 
-i = 0
-last_match_j = -1
-while i < len(str1) - 1:
-    matched = False
-    for j in range(last_match_j + 1, len(str2) - 1):
-        if str1[i] == str2[j]:
-            str1[i] = MATCH
-            str2[j] = MATCH
-            last_match_j = j
-            matched = True
-            break
-    if not matched:
-        str1[i] = DIFF
-    i += 1
+str1 = ' ' + str1
+str2 = ' ' + str2
 
-for j in range(len(str2) - 1):
-    if str2[j] != MATCH:
-        str2[j] = DIFF
+q = deque()
+dp = [ [ [INF] * 4 for _ in range(len1 + 1) ] for __ in range(2) ]
+sel = True
 
-i = 0
-j = 0
-while str1[i] != END or str2[j] != END:
-    if (str1[i] == MATCH or str1[i] == END) and str2[j] == DIFF:
-        # sys.stdout.write('a ' + str2[j] + '\n')
-        print('a', copy[j])
-        j += 1
-    elif str1[i] == DIFF and (str2[j] == MATCH or str2[j] == END):
-        # sys.stdout.write('d ' + copy[j] + '\n')
-        print('d', copy[j])
-        i += 1
-    elif str1[i] == DIFF and str2[j] == DIFF:
-        # sys.stdout.write('m ' + copy[j] + '\n')
-        print('m', copy[j])
-        i += 1
-        j += 1
-    elif str1[i] == MATCH and str2[j] == MATCH:
-        # sys.stdout.write('c ' + copy[j] + '\n')
-        print('c', copy[j])
-        i += 1
-        j += 1
+dp[sel][0][CPY] = 0
+dp[sel][0][ADD] = 0
+dp[sel][0][DEL] = 0
+for i in range(len1 + 1):
+    dp[sel][0][MOD] = i
+
+for i2 in range(1, len2 + 1):
+    sel = not sel
+    dp[sel][0][ADD] = i2
+    for i1 in range(1, len1 + 1):
+
+        if str1[i1] == str2[i2]:
+            min_cost = min( dp[not sel][i1 - 1] )
+            if min_cost != INF:
+                dp[sel][i1][CPY] = min_cost
+
+        min_cost = min(dp[not sel][i1])
+        if min_cost != INF:
+            dp[sel][i1][ADD] = min_cost + 1
+
+        min_cost = min(dp[sel][i1 - 1])
+        if min_cost != INF:
+            dp[sel][i1][DEL] = min_cost + 1
+
+        min_cost = min(dp[not sel][i1 - 1])
+        if min_cost != INF:
+            dp[sel][i1][MOD] = min_cost + 1
+        
+print('min_cost:', min(dp[sel][len1])
+
+# trace minimum cost script
+def find_script_op(script_ops, dp, i):
+    dp
+
+
+script_ops = []
