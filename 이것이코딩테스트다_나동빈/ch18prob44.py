@@ -1,52 +1,59 @@
 # 행성 터널
 # https://www.acmicpc.net/problem/2887
 #
-# Prim's 알고리즘
-# 한줄 설명: 아무 정점에서나 시작한다. 그 정점에 연결된 간선 중 비용이 가장 작으면서 아직 방문하지 않은 정점과 연결 된 것을 연결한다. 새롭게 연결된 정점에서 같은 동작을 반복한다.
-# 시간 복잡도: O(V^2) -> 힙 이용 시 O(V logE)
+# Kruskal's 알고리즘 문제이지만 거리의 정의에서 간선의 개수를 V^2 보다 훨씬 적게 추려낼 수 있는 문제
 #
-# Kruskal vs Prim
-# O(E logE) vs O(V^2) ( O(V logE) )
-# Sparse Graph vs Dense Graph
+# 정렬이 필요한지 유추하는 법
+# - 행성의 개수 100,000개 -> 프림 X (V^2 = 10,000,000,000)
+# - 간선의 개수 10,000,000,000개 -> 크루스칼 X (E logE = 100,000,000,000)
+# - 행성의 개수 100,000개 -> 정렬 O (V logV = 1,000,000)
 
-INF = int(1e10)
+def update_find_root(roots, a):
+    if roots[a] != a:
+        roots[a] = update_find_root(roots, roots[a])
+    return roots[a]
+
+def union(roots, a, b):
+    a = update_find_root(roots, a)
+    b = update_find_root(roots, b)
+    if a < b:
+        roots[b] = a
+    else:
+        roots[a] = b
+
+def is_cycle(roots, a, b):
+    return update_find_root(roots, a) == update_find_root(roots, b)
+
+def solution(N, planets):
+    planets = [ tuple( planets[i] + [i] ) for i in range(N) ]
+    edges = []
+    
+    for dim in range(3):
+        planets.sort(key=lambda p: p[dim])
+        for i in range(N-1):
+            edges.append( ( planets[i + 1][dim] - planets[i][dim], planets[i + 1][3], planets[i][3]) )
+    
+    edges.sort()
+
+    roots = [ i for i in range(N) ]
+    total_cost = 0
+    connected = 0
+    for edge in edges:
+        cost, a, b = edge
+        if is_cycle(roots, a, b): continue
+        total_cost += cost
+        union(roots, a, b)
+        connected += 1
+        if connected == N-1: break
+    
+    return total_cost
+
 
 import sys
-from math import sqrt
-from collections import deque
-
-def get_dist(star_a, star_b):
-    ax, ay, az = star_a
-    bx, by, bz = star_b
-    return min( (abs(ax - bx), abs(ay - by), abs(az - bz)) )
-    
-
-N = int(input())
-stars = []
+N = int(sys.stdin.readline().rstrip())
+planets = []
 for _ in range(N):
-    x, y, z = map(int, sys.stdin.readline().rstrip().split())
-    stars.append( (x, y, z) )
+    line = list( map(int, sys.stdin.readline().rstrip().split()) )
+    planets.append(line)
 
-total_cost = 0
-V = [False] * N
-now = 0
-V[now] = True
-
-for _ in range(N-1):
-    min_dist = INF
-    min_dist_v = -1
-    
-    for nex in range(N):
-        if V[nex]: continue
-
-        dist = get_dist(stars[now], stars[nex])
-
-        if dist < min_dist:
-            min_dist = dist
-            min_dist_v = nex
-    
-    total_cost += min_dist
-    V[min_dist_v] = True
-    now = min_dist_v
-
-print(total_cost)
+print( solution(N, planets) )
