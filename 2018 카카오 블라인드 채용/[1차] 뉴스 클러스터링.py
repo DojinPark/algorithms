@@ -18,9 +18,11 @@ def jaccard(pairs1, pairs2):
     pairs1.sort()
     pairs2.sort()
 
+    # last index 선언시 -1 로 초기화하는 것 잊지 말기
     last_j = -1
     match = 0
     for i in range(len(pairs1)):
+        # last index를 range에 넣을 때 last index + 1 을 넣는 것 잊지 말기
         for j in range(last_j + 1, len(pairs2)):
             if pairs1[i] == pairs2[j]:
                 match += 1
