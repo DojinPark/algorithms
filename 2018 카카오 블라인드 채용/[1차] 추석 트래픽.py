@@ -1,4 +1,5 @@
-# https://programmers.co.kr/learn/courses/30/lessons/17676?language=python3
+# https://programmers.co.kr/learn/courses/30/lessons/17676?language=python3 난이도(상)
+# 정답률 17.99%
 # 걸린시간 01:00
 
 SECOND = 1000
