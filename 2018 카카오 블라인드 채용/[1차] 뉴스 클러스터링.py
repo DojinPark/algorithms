@@ -1,5 +1,5 @@
-# https://programmers.co.kr/learn/courses/30/lessons/17677 난이도(중)
-# 정답률: 41.84%
+# https://programmers.co.kr/learn/courses/30/lessons/17677 
+# 정답률: 41.84% (난이도: 중)
 # 걸린시간: 00:20
 
 def build_pairs(input):
