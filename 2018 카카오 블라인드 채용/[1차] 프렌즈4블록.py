@@ -1,7 +1,7 @@
 # https://programmers.co.kr/learn/courses/30/lessons/17679
-# 
-# 정확성: 90.9  걸린시간: 01:30
-
+# 프렌즈4블록
+# 정답률: 48.01% (난이도: 상)
+# 정확성: 90.9  걸린시간: 1:30
 
 # m 높이 (board) (r)
 # n 폭 (board[0]) (c)
@@ -58,8 +58,8 @@ def __pull_down(m, n, board, r, c):
         __pull_down(m, n, board, r + 1, c)
 
 def pull_down(m, n, board):
-    for c in range(n):
-        for r in range(m - 2, -1, -1):
+    for r in range(m - 2, -1, -1):
+        for c in range(n):
             __pull_down(m, n, board, r, c)
 
 def count_erased(m, n, board):
@@ -106,4 +106,4 @@ print( solution(4,2, ["CC", "AA", "AA", "CC"]) )  # 8
 print( solution(2,2,["AA", "AA"]) ) # 4
 print( solution(2,2, ["AA", "AB"]) ) # 0
 
-print( solution(6,6,['eEeEeE', 'EeEeEe', 'eEeEeE', 'EeEeEe', 'eEeEeE', 'EeEeEe']) ) # 36
+print( solution(6,6,['AEAEAE', 'EAEAEA', 'AEAEAE', 'EAEAEA', 'AEAEAE', 'EAEAEA']) ) # 36
