@@ -1,7 +1,9 @@
 # https://programmers.co.kr/learn/courses/30/lessons/17679
-# 프렌즈4블록
+# 6. 프렌즈4블록
 # 정답률: 48.01% (난이도: 상)
 # 정확성: 90.9  걸린시간: 1:30
+#
+# 가장 긴 코드가 필요한 구현 문제
 
 # m 높이 (board) (r)
 # n 폭 (board[0]) (c)
