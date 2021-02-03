@@ -1,6 +1,7 @@
-# https://programmers.co.kr/learn/courses/30/lessons/17677 
+# https://programmers.co.kr/learn/courses/30/lessons/17677
+# 뉴스 클러스터링
 # 정답률: 41.84% (난이도: 중)
-# 걸린시간: 00:20
+# 걸린시간: 0:20
 
 def build_pairs(input):
     ret = []
