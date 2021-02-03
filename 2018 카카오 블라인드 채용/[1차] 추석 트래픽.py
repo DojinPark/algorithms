@@ -1,4 +1,5 @@
-# https://programmers.co.kr/learn/courses/30/lessons/17676?language=python3 
+# https://programmers.co.kr/learn/courses/30/lessons/17676?language=python3
+# 추석 트래픽
 # 정답률 17.99% (난이도: 상)
 # 걸린시간 01:00
 
