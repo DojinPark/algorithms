@@ -1,7 +1,10 @@
 # https://programmers.co.kr/learn/courses/30/lessons/17680
-# 캐시
+# 3. 캐시
 # 정답률: 45.26% (난이도: 하)
 # 걸린시간: 0:16
+#
+# CS 지식인 LRU 구현법을 아는지 묻는 문제
+# 캐시 사이즈가 0인 경우 예외 처리
 
 from collections import deque
 
