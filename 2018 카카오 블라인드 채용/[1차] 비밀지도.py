@@ -1,7 +1,9 @@
 # https://programmers.co.kr/learn/courses/30/lessons/17681
-# 비밀지도
+# 1. 비밀지도
 # 정답률: 81.78% (난이도: 하)
 # 걸린시간: 0:20
+#
+# 비트 연산
 
 def __to_bin_arr(n, dec):
     bins = []
