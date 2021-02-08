@@ -1,4 +1,5 @@
 # Complete Binary Tree
+# with an Array
 #            0
 #    1             2
 #  3     4       5   6
@@ -49,28 +50,28 @@ print(f'parent of 11 is {parent(a, 11)}')
 print(f'parent of 10 is {parent(a, 10)}')
 print(f'LCA of 9 and 3 is {least_common_ancestor(a, 9, 3)}')
 
-# ↙
+# ↙ (depth)
 def preorder(a, i = 0):
     if i == None: return
     print(a[i], end=' ')
     preorder(a, left_child(a, i))
     preorder(a, right_child(a, i))
 
-# →
+# → (depth)
 def inorder(a, i = 0):
     if i == None: return
     inorder(a, left_child(a, i))
     print(a[i], end=' ')
     inorder(a, right_child(a, i))
 
-# ↑
+# ↗ (depth)
 def postorder(a, i = 0):
     if i == None: return
     postorder(a, left_child(a, i))
     postorder(a, right_child(a, i))
     print(a[i], end=' ')
 
-# ↓
+# ↓ (breadth)
 from collections import deque
 def level_order(a, i = 0):
     q = deque()
@@ -87,3 +88,48 @@ preorder(a); print()
 inorder(a); print()
 postorder(a); print()
 level_order(a); print()
+
+
+
+
+# Binary Search Tree, BST
+# with Node Class (like class with pointers in C++)
+class Node:
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+def insert(root, key):
+    if key == root.key: return False
+    elif key < root.key:
+        if root.left:
+            insert(root.left, key)
+        else:
+            root.left = Node(key)
+            return True
+    elif key > root.key:
+        if root.right:
+            insert(root.right, key)
+        else:
+            root.right = Node(key)
+
+from collections import deque
+def inorder_class(root):
+    if root.left:
+        inorder_class(root.left)
+    print(root.key, end=' ')
+    if root.right:
+        inorder_class(root.right)
+
+root = Node(5)
+insert(root, 3)
+insert(root, 6)
+insert(root, 4)
+insert(root, 1)
+insert(root, 8)
+insert(root, 2)
+insert(root, 9)
+insert(root, 7)
+
+inorder_class(root); print()
