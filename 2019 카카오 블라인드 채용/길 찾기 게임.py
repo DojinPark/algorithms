@@ -1,5 +1,6 @@
 # https://programmers.co.kr/learn/courses/30/lessons/42892
 # 길 찾기 게임
+# 레벨 3
 # 풀이 1 시간 초과
 #
 # 노트1: 컨디셔 떨어지는 저녁 시간에 풀이 X
