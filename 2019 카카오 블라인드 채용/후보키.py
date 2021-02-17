@@ -1,5 +1,6 @@
 # https://programmers.co.kr/learn/courses/30/lessons/42890
 # 후보키
+# 레벨 2
 # 걸린시간: 0:33
 #
 # combination과 set을 이용하는 문제
