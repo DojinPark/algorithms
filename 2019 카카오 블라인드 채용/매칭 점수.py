@@ -1,7 +1,8 @@
-# 매칭 점수
 # https://programmers.co.kr/learn/courses/30/lessons/42893
-#
+# 매칭 점수
+# 레벨 3
 # 풀이 시간 초과
+#
 # 노트 1: regex의 기본과 re 라이브러리 사용법
 # 노트 2: re 라이브러리의 search나 findall 함수 대신 sub를 이용하여 후처리하면 더 직관적이고 쉽게 풀이할 수 있다.
 
