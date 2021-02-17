@@ -1,45 +1,8 @@
 # 무지의 먹방 라이브
 # https://programmers.co.kr/learn/courses/30/lessons/42891
 
-# 시간 초과 뜸
-# min_t 를 구하는 과정을 heapq 로 구현해보자
-# C++ 로 옮겨도 안되는 코드임
-from collections import deque
 
-def solution(food_times, k):
-    q = deque()
-    for i, t in enumerate(food_times):
-        q.append( (t, i+1) )
-
-    while q:
-        L = len(q)
-        min_t = min(q)[0]
-        
-        if k >= L * min_t:
-            sub = min_t
-        else:
-            sub = 1
-            
-        for i in range(len(q)):
-            now_t, now_i = q.popleft()
-            
-            if k == 0:
-                return now_i
-                
-            now_t -= sub
-            k -= sub
-            if now_t:
-                q.append( (now_t, now_i) )
-
-    return -1
-
-food_times = [3, 1, 2]
-k = 5
-# 1
-print( solution(food_times, k) )
-
-
-# heapq를 이용한 풀이
+# heapq를 이용해서 성공한 풀이
 from heapq import heappush as push
 from heapq import heappop as pop
 
@@ -88,6 +51,44 @@ k = 5
 # 1
 print( solution(food_times, k) )
 
+
+
+# 시간 초과 뜸
+# min_t 를 구하는 과정을 heapq 로 구현해보자
+# C++ 로 옮겨도 안되는 코드임
+from collections import deque
+
+def solution(food_times, k):
+    q = deque()
+    for i, t in enumerate(food_times):
+        q.append( (t, i+1) )
+
+    while q:
+        L = len(q)
+        min_t = min(q)[0]
+        
+        if k >= L * min_t:
+            sub = min_t
+        else:
+            sub = 1
+            
+        for i in range(len(q)):
+            now_t, now_i = q.popleft()
+            
+            if k == 0:
+                return now_i
+                
+            now_t -= sub
+            k -= sub
+            if now_t:
+                q.append( (now_t, now_i) )
+
+    return -1
+
+food_times = [3, 1, 2]
+k = 5
+# 1
+print( solution(food_times, k) )
 
 
 # 이 책으로 공부하기 전의 내 풀이
