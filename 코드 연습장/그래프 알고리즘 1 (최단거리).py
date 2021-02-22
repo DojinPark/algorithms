@@ -17,6 +17,7 @@ edges = [    # 단방향 그래프
     '6 2 6',
 ]
 
+# expected output: 0 2 3 1 2 4
 
 
 INF = int(1e9)
@@ -64,7 +65,6 @@ def shortest_path(V, edges_str, start):
     
     return costs
 
-# expected output: 0 2 3 1 2 4
 costs = shortest_path(V, edges, start)
 print(costs)
 print()
