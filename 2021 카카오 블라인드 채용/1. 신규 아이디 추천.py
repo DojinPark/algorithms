@@ -1,6 +1,6 @@
 # https://programmers.co.kr/learn/courses/30/lessons/72410
 # 1. 신규 아이디 추천
-# 걸린 시간 0:25
+# 걸린 시간: 0:25
 
 import re
 
