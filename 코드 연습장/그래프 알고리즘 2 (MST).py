@@ -29,15 +29,25 @@ def union(roots, i, j):
     else:
         roots[i] = j
 
+def is_cycle(roots, i, j):
+    return get_root(roots, i) == get_root(roots, j)
+
 from heapq import heappush as push, heappop as pop
 def kruskal(V, edges_str):
     edges = [ map(int, e.split()) for e in edges_str ]
 
+    roots = [ i for i in range(V + 1) ]
     h = []
+    sum = 0
+
     for a, b, c in edges:
         push(h, (c, a, b))
     
-    
+    while h:
+        c, a, b = pop(h)
+        if not is_cycle(roots, a, b):
+            sum += c
+            union(roots, a, b)
 
     return sum
 
