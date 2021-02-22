@@ -1,6 +1,6 @@
 # https://programmers.co.kr/learn/courses/30/lessons/72412
 # 3. 순위 검색
-# 정확성 통과 걸린 시간 0:25
+# 정확성 통과 걸린 시간: 0:25
 # 효율성 통과 시도 2회
 #
 # dict 타입의 key 를 복잡한 것이더라도 자유롭게 사용하기!
