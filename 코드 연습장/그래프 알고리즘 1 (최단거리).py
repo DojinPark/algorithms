@@ -37,7 +37,7 @@ INF = int(1e9)
 # - 모든 노드가 포함될 때 까지 반복한다.
 
 # 일반적인 다익스트라
-def shortest_path(V, edges_str, start):
+def dijkstra(V, edges_str, start):
     edges = [ [] for _ in range(V + 1) ]
     for edge_str in edges_str:
         a, b, c = map(int, edge_str.split())
@@ -67,14 +67,14 @@ def shortest_path(V, edges_str, start):
     
     return costs
 
-costs = shortest_path(V, edges, start)
+costs = dijkstra(V, edges, start)
 print(costs)
 print()
 
 # 힙을 이용한 다익스트라
 from heapq import heappush as push, heappop as pop
 
-def shortest_path(V, edges_str, start):
+def dijkstra(V, edges_str, start):
     edges = [ [] for _ in range(V + 1) ]
 
     for edge_str in edges_str:
@@ -105,7 +105,7 @@ def shortest_path(V, edges_str, start):
 
     return costs
 
-costs = shortest_path(V, edges, start)
+costs = dijkstra(V, edges, start)
 print(costs)
 print()
 
@@ -114,7 +114,7 @@ print()
 # - 인덱스 루프 순서가 k, a, b 여야 하는 이유는 논문으로 증명될
 #   정도로 복잡하니 그냥 외우면 된다.
 # -> 그만큼 면접 질문으로 활용될 가능성도 적다.
-def shortest_path_all_pairs(V, edges_str, start):
+def kruskal(V, edges_str, start):
     mat = [ [(0 if a == b else INF) for a in range(V + 1)] for b in range(V + 1) ]
     for edge_str in edges_str:
         a, b, c = map(int, edge_str.split())
@@ -127,7 +127,7 @@ def shortest_path_all_pairs(V, edges_str, start):
     
     return mat
     
-costs = shortest_path_all_pairs(V, edges, start)
+costs = kruskal(V, edges, start)
 for a in range(1, V + 1):
     for b in range(1, V + 1):
         print( costs[a][b], end=' ' )
