@@ -51,9 +51,11 @@ def shortest_path(V, edges_str, start):
     costs[a] = 0
 
     for _ in range(V - 1):
+        # 새롭게 방문한 정점 주변 정점에 최소거리 업데이트
         for c, b in edges[a]:
             costs[b] = min(costs[b], c + costs[a])
         
+        # 아직 방문하지 않았지만 인접한 정점 중 거리가 최소인 정점에 방문
         min_v, min_c = 0, INF
         for v in range(1, V + 1):
             if not visited[v] and costs[v] < min_c:
@@ -70,8 +72,6 @@ print(costs)
 print()
 
 # 힙을 이용한 다익스트라
-# sub-graph에서 뻗어 나가는 모든 간선을 확인하는 
-# 
 from heapq import heappush as push, heappop as pop
 
 def shortest_path(V, edges_str, start):
