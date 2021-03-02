@@ -104,15 +104,16 @@ def insert(root, key):
     if key == root.key: return False
     elif key < root.key:
         if root.left:
-            insert(root.left, key)
+            return insert(root.left, key)
         else:
             root.left = Node(key)
             return True
     elif key > root.key:
         if root.right:
-            insert(root.right, key)
+            return insert(root.right, key)
         else:
             root.right = Node(key)
+            return True
 
 from collections import deque
 def inorder_class(root):
