@@ -1,75 +1,53 @@
 # https://programmers.co.kr/learn/courses/30/lessons/67260
 # 5. 동굴 탐험
 # 풀이 시간 초과
+#
+# 노트: Directed Graph를 처음 다루어 보았음.
+#      Directed Graph의 cycle 판별은 위상 정렬 알고리즘으로 하면 됨!
 
 import sys
 sys.setrecursionlimit(200009)
 
-class Node:
-    def __init__(self, val):
-        self.val = val
-        self.children = []
+def dfs_tree(tree, edge, visited, a = 0):
+    visited[a] = True
+    for b in edge[a]:
+        if not visited[b]:
+            tree[a].append(b)
+            dfs_tree(tree, edge, visited, b)
 
-def dfs_tree(tree, path_dict, visited, x = 0):
-    visited[x] = True
-    for y in path_dict[x]:
-        if not visited[y]:
-            tree[y] = x
-            dfs_tree(tree, path_dict, visited, y)
-
-def dfs_cycle(root, visited):
-    if visited[ root.val ]: return True
-    else:
-        visited[ root.val ] = True
-        for child in root.children:
-            if dfs_cycle(child, visited):
-                return True
-        return False
-        
 from collections import deque
 def solution(n, path, order):
-    answer = True
+    graph = [ [] for _ in range(n) ]
+    cnt = [1] * n; cnt[0] = 0
+    visited = set()
+    q = deque()
 
-    tree = [i for i in range(n)]
-    roots = {}
-    path_dict = {}
-    afters = set()
-    befores = set()
-    starts = set()
-
-    for x, y in path:
-        if x not in path_dict.keys():
-            path_dict[x] = []
-        if y not in path_dict.keys():
-            path_dict[y] = []
-        path_dict[x].append(y)
-        path_dict[y].append(x)
+    edge = [ [] for _ in range(n) ]
+    for a, b in path:
+        edge[a].append(b)
+        edge[b].append(a)
     
-    dfs_tree(tree, path_dict, [False] * n)
+    dfs_tree(graph, edge, [False] * n)
 
-    for x, y in order:
-        roots[x] = Node(x)
-        roots[y] = Node(y)
-        roots[x].children.append(roots[y])
-        befores.add(x)
-        afters.add(y)
+    for a, b in order:
+        graph[a].append(b)
+        cnt[b] += 1
     
-    for x in befores:
-        i = x
-        while i != 0:
-            i = tree[i]
-            if i in afters:
-                roots[i].children.append(roots[x])
-                starts.add(i)
+    if cnt[0] == 0:
+        q.append(0)
+        visited.add(0)
+    while q:
+        a = q.popleft()
+        for b in graph[a]:
+            if b in visited: continue
+        
+            cnt[b] -= 1
+            if cnt[b] == 0:
+                visited.add(b)
+                q.append(b)
     
-    visited = [False] * n
-    for x in starts:
-        # if visited[x]: continue
-        if dfs_cycle(roots[x], [False] * n):
-            return False
-            # continue
-
-    return True
+    if len(visited) == n: return True
+    else: return False
 
 n = 9
 path = 	[[0,1],[0,3],[0,7],[8,1],[3,6],[1,2],[4,7],[7,5]]
