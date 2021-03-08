@@ -1,6 +1,7 @@
 # https://programmers.co.kr/learn/courses/30/lessons/67258
 # 3. 보석 쇼핑
 # 0:47
+# 0: 47
 
 def solution(gems):
     answer = [1, len(gems)]
