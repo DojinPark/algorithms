@@ -1,0 +1,27 @@
+# https://programmers.co.kr/learn/courses/30/lessons/64061
+# 1. 크레인 인형뽑기 게임
+# 걸린 시간: 0:19
+
+# https://programmers.co.kr/learn/courses/30/lessons/64065
+# 2. 튜플
+# 걸린 시간: 0:15
+
+# https://programmers.co.kr/learn/courses/30/lessons/64064
+# 3. 불량 사용자
+# 풀이 시간 초과
+#
+# 노트: set형에서 list나 tuple로 자동 형 변환 시 순서가 랜덤인 것 같음
+# 노트: itertools.product에 list of lists 사용시
+#       *(asterisk)를 이용한 unpacking 해야 함
+#       예) product(*lists)
+
+# https://programmers.co.kr/learn/courses/30/lessons/64063
+# 4. 호텔 방 배정
+# 정확성테스트 걸린 시간: 0:40
+
+# https://programmers.co.kr/learn/courses/30/lessons/64062
+# 5. 징검다리 건너기
+# 정확성테스트 걸린 시간: 0:45
+# 효율성테스트 걸린 시간: 1:10
+
+풀이 결과 3.5솔
