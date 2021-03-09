@@ -3,8 +3,12 @@
 # 정확성테스트 걸린 시간: 0:40
 #
 # 노트: union-find 알고리즘 응용 문제
-# 노트: 정점의 개수는 적지만 정점 번호의 제한값이 매우 큰 경우
-#       dict[정점 번호] = 부모 정점 번호 로 트리 표현
+#       - union 할 노드 pair가 직접적으로 주어지지 않고,
+#         방 번호가 겹치는 경우에 해당함
+#       - union 해야할 필요가 없는 새 노드를 추가할 때는,
+#         (자신의 노드 번호 + 1)을 부모 노드 번호 디폴트 값으로 지정해야함
+# 노트: 정점의 개수는 적지만 노드 번호의 제한값이 매우 큰 경우
+#       dict[노드 번호] = 부모 노드 번호 로 트리 표현
 
 import sys
 sys.setrecursionlimit(10**9)
@@ -21,15 +25,12 @@ def add(parents, x):
     return x
 
 def solution(k, room_number):
-    N = len(room_number)
-    answer = [0] * N
     parents = {}
     
     for i, n in enumerate(room_number):
-        result = add(parents, n)
-        answer[i] = result
+        room_number[i] = add(parents, n)
     
-    return answer
+    return room_number
 
 k = 10
 room_number = [1,3,4,1,3,1]
