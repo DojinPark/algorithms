@@ -14,6 +14,7 @@ EMPTY = -1
 LIMIT_X = 100000
 LIMIT_Y = 1000
 
+# 문제에서 주어진 트리는 x 좌표를 key로 하는 binary search tree임
 class Node:
     def __init__(self, x, num):
         self.key = x
@@ -36,8 +37,7 @@ def __add_node(root, node):
 
 def build_tree(nodeinfo):
     nodeinfo = [ (x, y, num) for num, (x, y) in enumerate(nodeinfo) ]
-    nodeinfo.sort()
-    nodeinfo.sort(key=lambda x: x[1], reverse=True)
+    nodeinfo.sort(key=lambda x: x[1], reverse=True) # y 좌표 내림차순(트리 깊이 오름차순)으로 정렬
 
     y_now = nodeinfo[0][1]
     root = Node(nodeinfo[0][0], nodeinfo[0][2])
