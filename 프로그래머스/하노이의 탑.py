@@ -2,6 +2,9 @@
 # 하노이의 탑 (Level 3)
 # 걸린 시간 1:11
 #
+# 노트: dynamic programming => top-down + recursion + without memoization 
+#      이 일반적인 풀이
+#
 # 노트: "다른 언어로 풀었다면 해쉬테이블과 어레이리스트 선언을
 #       비교적 자유롭게 사용하지 못해서 못풀지 않았을까" 하는
 #       생각을 버리고, 파이썬의 문법적 이점 dict를 자유롭게 활용하자.
