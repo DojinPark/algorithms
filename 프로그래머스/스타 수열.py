@@ -1,5 +1,5 @@
 # https://programmers.co.kr/learn/courses/30/lessons/70130
-# 스타 수열
+# 스타 수열 (Level 3)
 # 걸린 시간: 0:51
 
 def get_num_cnt(a):
