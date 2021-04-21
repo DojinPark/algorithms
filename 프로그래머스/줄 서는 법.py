@@ -16,6 +16,7 @@ def solution(n, k):
     
     while nums:
         div //= n # div: 오른쪽에서 n번째 수가 같은 경우의 수
+        
         i = k // div # nums에서 남은 수
         
         answer.append(nums[i])
