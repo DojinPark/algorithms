@@ -21,7 +21,6 @@ function solution(board, moves) {
             stack.push( lines[m].pop() )
             if (stack.length >= 2 && stack[stack.length - 1] == stack[stack.length - 2]) {
                 answer += 2;
-                // stack.splice(stack.length - 2, stack.length);
                 stack.pop();
                 stack.pop();
             }
