@@ -17,7 +17,7 @@ function solution(board, moves) {
 
     for (let m of moves) {
         m -= 1;
-        if (lines[m].length > 0) { 
+        if (lines[m].length > 0) {
             stack.push( lines[m].pop() )
             if (stack.length >= 2 && stack[stack.length - 1] == stack[stack.length - 2]) {
                 answer += 2;
@@ -27,7 +27,7 @@ function solution(board, moves) {
         }
     }
 
-    return answer;
+    return answer
 }
 
 board = [[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]
