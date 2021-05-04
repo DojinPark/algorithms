@@ -2,6 +2,8 @@
 #
 # https://programmers.co.kr/learn/courses/30/lessons/60059
 
+# 풀이 실패
+
 from copy import deepcopy
 
 def rotate_key(key):
